@@ -1,0 +1,23 @@
+app: gops-gimlet-expressjs-test-app-pangarabbit-preview
+env: pangarabbit
+preview: true
+namespace: default
+chart:
+  name: https://github.com/gimlet-io/onechart.git?branch=simplified-schema&path=/charts/onechart/
+values:
+  gitBranch: '{{ .BRANCH }}'
+  gitRepository: sachajw/gops-gimlet-expressjs-test-app-pangarabbit
+  gitSha: '{{ .SHA }}'
+  image:
+    registry: dockerRegistry
+    repository: 127.0.0.1:32447/{{ .APP }}
+    strategy: buildpacks
+    tag: '{{ .SHA }}'
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      kubernetes.io/ingress.class: nginx
+    host: gops-gimlet-expressjs-test-app-pangarabbit-preview.gimlet.app
+    tlsEnabled: true
+  resources:
+    ignoreLimits: true
