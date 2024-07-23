@@ -5,9 +5,29 @@ chart:
   name: https://github.com/gimlet-io/onechart.git?branch=simplified-schema&path=/charts/static-site/
 values:
   gitRepository: sachajw/gops-gimlet-expressjs-test-app-pangarabbit
-  gitSha: '{{ .SHA }}'
+  gitSha: "{{ .SHA }}"
   ingress:
     host: firstapp.pangarabbit.com
     tlsEnabled: true
   resources:
     ignoreLimits: true
+manifests: |
+  ---
+  apiVersion: traefik.io/v1alpha1
+  kind: IngressRoute
+  metadata:
+    name: firstapp
+    namespace: default
+  spec:
+    entryPoints:
+      - web
+      - websecure
+    routes:
+      - kind: Rule
+        match: Host(`firstapp.pangarabbit.com`)
+        services:
+          - name: firstapp
+            namespace: default
+            port: 10081
+    tls:
+      certResolver: default
