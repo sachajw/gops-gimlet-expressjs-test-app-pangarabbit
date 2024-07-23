@@ -16,8 +16,8 @@ values:
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
-      kubernetes.io/ingress.class: nginx
-    host: gops-gimlet-expressjs-test-app-pangarabbit-preview.gimlet.app
+      kubernetes.io/ingress.class: traefik
+    host: firstapp.pangarabbit.com
     tlsEnabled: true
   resources:
     ignoreLimits: true
