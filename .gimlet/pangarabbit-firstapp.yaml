@@ -1,0 +1,13 @@
+app: firstapp
+env: pangarabbit
+namespace: default
+chart:
+  name: https://github.com/gimlet-io/onechart.git?branch=simplified-schema&path=/charts/static-site/
+values:
+  gitRepository: sachajw/gops-gimlet-expressjs-test-app-pangarabbit
+  gitSha: '{{ .SHA }}'
+  ingress:
+    host: firstapp.pangarabbit.com
+    tlsEnabled: true
+  resources:
+    ignoreLimits: true
